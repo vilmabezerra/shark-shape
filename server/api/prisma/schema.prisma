@@ -37,20 +37,22 @@ model Workout {
 model WorkoutInfo {
   id            String       @id @default(uuid())
   workoutId     String
-  exerciseId    Int
+  exerciseId    String
   series        Int
   repetitions   Int
   Workout       Workout      @relation(fields: [workoutId], references: [id])
   WorkoutItem   WorkoutItem? @relation(fields: [workoutItemId], references: [id])
   workoutItemId String?
+  Exercise      Exercise     @relation(fields: [exerciseId], references: [id])
 }
 
 model Exercise {
-  id        String   @id @default(uuid())
-  name      String   @unique
-  img       String
-  Workout   Workout? @relation(fields: [workoutId], references: [id])
-  workoutId String?
+  id          String        @id @default(uuid())
+  name        String        @unique
+  img         String
+  Workout     Workout?      @relation(fields: [workoutId], references: [id])
+  workoutId   String?
+  WorkoutInfo WorkoutInfo[]
 }
 
 model WorkoutItem {

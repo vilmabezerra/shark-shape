@@ -22,7 +22,7 @@ CREATE TABLE "Workout" (
 CREATE TABLE "WorkoutInfo" (
     "id" TEXT NOT NULL,
     "workoutId" TEXT NOT NULL,
-    "exerciseId" INTEGER NOT NULL,
+    "exerciseId" TEXT NOT NULL,
     "series" INTEGER NOT NULL,
     "repetitions" INTEGER NOT NULL,
     "workoutItemId" TEXT,
@@ -77,6 +77,9 @@ ALTER TABLE "WorkoutInfo" ADD CONSTRAINT "WorkoutInfo_workoutId_fkey" FOREIGN KE
 
 -- AddForeignKey
 ALTER TABLE "WorkoutInfo" ADD CONSTRAINT "WorkoutInfo_workoutItemId_fkey" FOREIGN KEY ("workoutItemId") REFERENCES "WorkoutItem"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "WorkoutInfo" ADD CONSTRAINT "WorkoutInfo_exerciseId_fkey" FOREIGN KEY ("exerciseId") REFERENCES "Exercise"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Exercise" ADD CONSTRAINT "Exercise_workoutId_fkey" FOREIGN KEY ("workoutId") REFERENCES "Workout"("id") ON DELETE SET NULL ON UPDATE CASCADE;
