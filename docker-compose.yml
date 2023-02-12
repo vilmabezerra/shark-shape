@@ -1,0 +1,35 @@
+version: '3.0'
+services:
+  db:
+    container_name: shark_db
+    image: postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-dbPassword}
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+  
+  dbadmin:
+    container_name: shark_db_admin
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-admin@db.com}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+
+    ports:
+      - "${PGADMIN_PORT:-5050}:80"
+    restart: unless-stopped
+
+  api-service:
+    build: 
+      context: ./server/api/
+      dockerfile: ./docker/Dockerfile.dev
+    env_file:
+      - .env
+    ports: 
+      - "3000:3000"
+    volumes:
+      - ./server/api/:/usr/src/app
+      - /usr/src/app/node_modules
