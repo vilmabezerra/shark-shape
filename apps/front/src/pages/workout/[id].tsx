@@ -1,7 +1,15 @@
+import { GoBackButton } from '@/components/GoBack/GoBack';
+import { GoBack } from '@/components/icons/GoBack';
 import { HomePage } from '@/features/home/home.page'
+import { WorkoutListPage } from '@/features/workout/workout-list.page';
 import Head from 'next/head'
+import Link from 'next/link';
+import {useRouter} from 'next/router';
 
-export default function Home() {
+export default function Workout() {
+  const router = useRouter()
+  const { id } = router.query
+
   return (
     <>
       <Head>
@@ -11,7 +19,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main style={{ marginTop: 64 }}>
-        <HomePage />
+        <GoBackButton />
+        <WorkoutListPage />
       </main>
     </>
   )
