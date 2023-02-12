@@ -5,7 +5,68 @@ generator client {
   provider = "prisma-client-js"
 }
 
+generator erd {
+  provider = "prisma-erd-generator"
+  output   = "../.github/db/erd.png"
+}
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model WorkoutPlan {
+  id        String    @id @default(uuid())
+  name      String    @unique
+  workouts  Workout[]
+  startDate DateTime
+  endDate   DateTime
+  createdAt DateTime  @default(now())
+}
+
+model Workout {
+  id            String        @id @default(uuid())
+  name          String        @unique
+  workoutPlanId String
+  workoutInfo   WorkoutInfo[]
+  exercises     Exercise[]
+  workoutItems  WorkoutItem[]
+  WorkoutPlan   WorkoutPlan   @relation(fields: [workoutPlanId], references: [id])
+}
+
+model WorkoutInfo {
+  id            String       @id @default(uuid())
+  workoutId     String
+  exerciseId    Int
+  series        Int
+  repetitions   Int
+  Workout       Workout      @relation(fields: [workoutId], references: [id])
+  WorkoutItem   WorkoutItem? @relation(fields: [workoutItemId], references: [id])
+  workoutItemId String?
+}
+
+model Exercise {
+  id        String   @id @default(uuid())
+  name      String   @unique
+  img       String
+  Workout   Workout? @relation(fields: [workoutId], references: [id])
+  workoutId String?
+}
+
+model WorkoutItem {
+  id             String         @id @default(uuid())
+  workoutInfo    WorkoutInfo[]
+  exercisesItems ExerciseItem[]
+  startDate      DateTime
+  endDate        DateTime
+  Workout        Workout?       @relation(fields: [workoutId], references: [id])
+  workoutId      String?
+}
+
+model ExerciseItem {
+  id            String       @id @default(uuid())
+  exerciseId    String
+  payload       String
+  WorkoutItem   WorkoutItem? @relation(fields: [workoutItemId], references: [id])
+  workoutItemId String?
 }
