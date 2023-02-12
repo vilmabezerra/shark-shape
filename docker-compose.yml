@@ -29,7 +29,19 @@ services:
     env_file:
       - .env
     ports: 
-      - "3000:3000"
+      - "8000:3000"
     volumes:
       - ./server/api/:/usr/src/app
+      - /usr/src/app/node_modules
+
+  frontend:
+    build: 
+      context: ./apps/front
+      dockerfile: ./docker/Dockerfile.dev
+    env_file:
+      - .env
+    ports: 
+      - "3000:3000"
+    volumes:
+      - ./apps/front:/usr/src/app
       - /usr/src/app/node_modules
