@@ -1,0 +1,60 @@
+{
+  "plans": [{
+    "id": "1",
+    "name": "Ficar bolado",
+    "workouts":[{
+      "id": "1"
+    }]
+  }],
+  "exercises": [{
+    "id": "1",
+    "name": "Abdominal",
+    "img": "/icons/exercises/abdominal.png"
+  }, {
+    "id": "2",
+    "name": "Abdominal 2",
+    "img": "/icons/exercises/abdominal-2.png"
+  }],
+  "workouts": [{
+    "id": "1",
+    "name": "Abdomen Bolado",
+      "workoutInfo": {
+        "workoutId": "1",
+        "exerciseId": 1,
+        "series": 2,
+        "repetitions": 30
+      },
+      "items":[{
+        "id": "1"
+      }],
+      "exercicies": [{
+        "id": "1"
+      }, {
+        "id": "2"
+      }],
+      "startDate": "2023-02-12T18:25:31.752Z",
+      "endDate": "2023-02-13T18:25:31.752Z",
+      "createdAt": "2023-02-12T18:25:31.752Z"
+  }],
+  "exercisesItems": [{
+    "id": "1",
+    "exerciseId": "1",
+    "payload": {
+      "loan": 60
+    }
+  }],
+  "workoutItems": [{
+    "id": "1",
+    "workoutInfo": {
+      "workoutId": "1",
+      "exerciseId": "1",
+      "series": 2,
+      "repetitions": 30
+    },
+    "exercisesItems": [{
+      "id": "1"
+    }],
+    "startDate": "2023-02-12T18:25:31.752Z",
+    "endDate": "2023-02-13T18:25:31.752Z"
+  }]
+}

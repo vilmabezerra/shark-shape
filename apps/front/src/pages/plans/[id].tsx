@@ -1,7 +1,9 @@
-import { HomePage } from '@/features/home/home.page'
+import { GoBackButton } from '@/components/GoBack/GoBack';
+import { GoBack } from '@/components/icons/GoBack';
+import { PlansListPage } from '@/features/plans/plans-list.page';
 import Head from 'next/head'
-
-export default function Home() {
+import Link from 'next/link';
+export default function Workout() {
   return (
     <>
       <Head>
@@ -11,7 +13,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main style={{ marginTop: 64 }}>
-        <HomePage />
+        <GoBackButton />
+        <PlansListPage />
       </main>
     </>
   )
